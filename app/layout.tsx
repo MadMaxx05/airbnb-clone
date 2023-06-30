@@ -3,7 +3,11 @@ import { Inter } from "next/font/google";
 
 import Navbar from "./components/navbar/Navbar";
 import RegisterModal from "./components/modals/RegisterModal";
+import LoginModal from "./components/modals/LoginModal";
+
 import ToasterProvider from "./providers/ToasterProvider";
+
+import getCurrentUser from "@/app/actions/getCurrentUser";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,17 +16,20 @@ export const metadata = {
   description: "Made with Next.js 13",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const currentUser = await getCurrentUser();
+
   return (
     <html lang="en">
       <body className={inter.className}>
         <ToasterProvider />
         <RegisterModal />
-        <Navbar />
+        <LoginModal />
+        <Navbar currentUser={currentUser} />
         {children}
       </body>
     </html>
