@@ -7,3 +7,10 @@ body,
 :root {
   @apply h-full;
 }
+
+.leaflet-bottom,
+.leaflet-control,
+.leaflet-pane,
+.leaflet-top {
+  @apply !z-0;
+}
