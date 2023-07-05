@@ -5,13 +5,13 @@ import Modal from "./Modal";
 import CategoryInput from "../inputs/CategoryInput";
 import CountrySelect from "@/app/components/inputs/CountrySelect";
 import Counter from "../inputs/Counter";
+import ImageUpload from "../inputs/ImageUpload";
 
 import { categories } from "../navbar/Categories";
 
 import useRentModal from "@/app/hooks/useRentModal";
 
 import { useMemo, useState } from "react";
-import dynamic from "next/dynamic";
 
 import { FieldValues, useForm } from "react-hook-form";
 
@@ -55,14 +55,7 @@ const RentModal = () => {
   const guestCount = watch("guestCount");
   const roomCount = watch("roomCount");
   const bathroomCount = watch("bathroomCount");
-
-  const Map = useMemo(
-    () =>
-      dynamic(() => import("../Map"), {
-        ssr: false,
-      }),
-    [location]
-  );
+  const imageSrc = watch("imageSrc");
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -130,7 +123,6 @@ const RentModal = () => {
           value={location}
           onChange={(value) => setCustomValue("location", value)}
         />
-        <Map center={location?.latlng} />
       </div>
     );
   }
@@ -159,6 +151,21 @@ const RentModal = () => {
           subtitle="How many bathrooms do you have?"
           value={bathroomCount}
           onChange={(value) => setCustomValue("bathroomCount", value)}
+        />
+      </div>
+    );
+  }
+
+  if (step === STEPS.IMAGES) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Add a photo of your place"
+          subtitle="Show guests what your place look like"
+        />
+        <ImageUpload
+          value={imageSrc}
+          onChange={(value) => setCustomValue("imageSrc", value)}
         />
       </div>
     );
