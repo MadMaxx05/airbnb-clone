@@ -14,3 +14,11 @@ body,
 .leaflet-top {
   @apply !z-0;
 }
+
+.rdrMonth {
+  @apply !w-full;
+}
+
+.rdrCalendarWrapper {
+  @apply !text-base !w-full;
+}
