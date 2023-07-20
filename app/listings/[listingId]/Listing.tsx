@@ -1,7 +1,6 @@
 "use client";
 
-import { Reservation } from "@prisma/client";
-import { SafeListing, SafeUser } from "@/app/types";
+import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
 
 import axios from "axios";
 
@@ -29,7 +28,7 @@ const initialDateRange = {
 };
 
 interface ListingProps {
-  reservations?: Reservation[];
+  reservations?: SafeReservation[];
   listing: SafeListing & {
     user: SafeUser;
   };
