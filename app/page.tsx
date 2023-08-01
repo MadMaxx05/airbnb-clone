@@ -15,8 +15,6 @@ const Home = async ({ searchParams }: HomeProps) => {
   const currentUser = await getCurrentUser();
   const listings = await getListings(searchParams);
 
-  const isEmpty = true;
-
   if (listings.length === 0) {
     return <EmptyState showReset />;
   }
